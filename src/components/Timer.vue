@@ -16,7 +16,7 @@
       </template>
     </div>
     <button id="edit" v-bind:class="{ editing }" class="ui-component" @click="toggleEditing">
-      <icon-base icon-name="pencil" height="18" width="18">
+      <icon-base height="18" width="18">
         <icon-pencil v-if="!editing"/>
         <icon-tick v-if="editing"/>
       </icon-base>
