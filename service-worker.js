@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.93e82702d8d5c7ede51a9fc7d4ddc66f.js"
+  "/precache-manifest.02b8c921063be6003e0c5e68e6fa7e2d.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "squash"});
