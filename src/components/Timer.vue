@@ -2,12 +2,7 @@
   <div class="timer-container">
     <div class="timer ui-component" @click="startTimer">
       <template v-if="!editing">
-        <VueCountdown
-          ref="timer" :time="startTime * 1000" :auto-start="false" :transform="transform">
-          <template auto-start=false slot-scope="props">
-            {{ props.minutes }}:{{ props.seconds }}
-          </template>
-        </VueCountdown>
+        <CountdownTimer ref="timer" :time="startTime * 60" />
       </template>
       <template v-else>
         <form @submit.prevent="handleSubmit">
@@ -25,7 +20,7 @@
 </template>
 
 <script>
-import VueCountdown from '@chenfengyuan/vue-countdown';
+import CountdownTimer from './CountdownTimer.vue';
 import IconBase from './icons/IconBase.vue';
 import IconPencil from './icons/IconPencil.vue';
 import IconTick from './icons/IconTick.vue';
@@ -33,14 +28,14 @@ import IconTick from './icons/IconTick.vue';
 export default {
   name: 'Timer',
   components: {
-    VueCountdown,
+    CountdownTimer,
     IconBase,
     IconPencil,
     IconTick,
   },
   data() {
     return {
-      startTime: 60 * 5,
+      startTime: 5,
       counting: false,
       editing: false,
       timeValue: '',
@@ -53,7 +48,7 @@ export default {
       }
 
       if (this.counting) {
-        this.$refs.timer.abort();
+        this.$refs.timer.stop();
         this.counting = false;
       } else {
         this.$refs.timer.start();
@@ -62,6 +57,8 @@ export default {
     },
     toggleEditing() {
       if (this.editing) {
+        this.$refs.timer.stop();
+        this.counting = false;
         this.handleSubmit();
       } else {
         this.editing = true;
@@ -89,7 +86,7 @@ export default {
       if (time.length > 2) {
         // TODO: turn to seconds
       } else {
-        this.startTime = parseInt(time * 60, 10);
+        this.startTime = parseInt(time, 10);
       }
       this.editing = false;
     },
