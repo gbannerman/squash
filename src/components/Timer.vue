@@ -57,7 +57,9 @@ export default {
     },
     toggleEditing() {
       if (this.editing) {
-        this.$refs.timer.stop();
+        if (this.$refs.timer) {
+          this.$refs.timer.stop();
+        }
         this.counting = false;
         this.handleSubmit();
       } else {
